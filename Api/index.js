@@ -76,5 +76,5 @@ app.get("/students", (req, res) => {
 });
 
 app.listen(3001, () => {
-  console.log("Servidor iniciado en el puerto 3000");
+  console.log("Servidor iniciado en el puerto 3001");
 });

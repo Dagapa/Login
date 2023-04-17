@@ -17,7 +17,7 @@ export const Search = () => {
   }
 
   const handleStudent = () => {
-    const searchedStudent = data.filter(student => student.Nombre.toLowerCase().includes(search.toLowerCase()))
+    const searchedStudent = data.filter(student => student.Nombre.toLowerCase().includes(search.toLowerCase()) || student.Apellido.toLowerCase().includes(search.toLowerCase()))
     setStudents(searchedStudent)
   }
 
