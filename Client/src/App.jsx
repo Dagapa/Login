@@ -3,6 +3,7 @@ import { Search } from "./components/Search/Search";
 import { Login } from './components/Login/Login'
 import { useContext } from "react";
 import "./App.css";
+import { Cursos } from "./components/Cursos/Cursos";
 
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Login />} />
         <Route path='/search' element={<Search />} />
+        <Route path="/cursos" element={<Cursos/>}/>
       </Routes>
     </BrowserRouter>
   )
