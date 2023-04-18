@@ -11,6 +11,16 @@ const dbConfig = {
   database: "lineasql",
 };
 
+// Middleware para agregar encabezados CORS
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
+
 // Función para obtener los resultados de una consulta a la base de datos
 const getQueryResult = async (query) => {
   try {

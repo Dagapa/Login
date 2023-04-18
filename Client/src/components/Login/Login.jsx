@@ -4,29 +4,38 @@ import { Link } from "react-router-dom"
 import styles from "./Login.module.css"
 
 export const Login = () => {
-
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [isValidUser, setIsValidUser] = useState(false);
 
   const handleUsername = (event) => {
-    const input = event.target.value
-    setUsername(input)
-  }
+    const input = event.target.value;
+    setUsername(input);
+  };
 
   const handlePassword = (event) => {
-    const inputPassword = event.target.value
-    setPassword(inputPassword)
-  }
+    const inputPassword = event.target.value;
+    setPassword(inputPassword);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const isValid = await validatorUser(username, password);
+    setIsValidUser(isValid);
+  };
+
+  console.log(isValidUser)
 
   return (
     <div className={styles.container}>
-      <form action="submit" className={styles.forms}>
+      <form onSubmit={handleSubmit} className={styles.forms}>
         <label> Username </label>
         <input onChange={handleUsername} type="text" />
         <label> Password </label>
-        <input onChange={handlePassword} type="text" />
-        {validatorUser(username, password) === true ? <Link to={'search'}>enviar</Link> : null}
+        <input onChange={handlePassword} type="password" />
+        <button type="submit">enviar</button>
       </form>
+      {isValidUser && <Link to={"search"}><button>Ir a búsqueda</button></Link>}
     </div>
-  )
-}
+  );
+};
