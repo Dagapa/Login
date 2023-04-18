@@ -1,28 +1,38 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { students } from "../../utils/get";
 import styles from "./Search.module.css";
 
 export const Search = () => {
   const [search, setSearch] = useState("");
-  const [students, setStudents] = useState([]);
+  const [studentList, setStudentList] = useState([]);
+  const [studentsData, setStudentsData] = useState([]);
   const [selectedCourse, setSelectedCourse] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const studentData = await students();
+        setStudentList(studentData);
+        setStudentsData(studentData);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, []);
 
   const handleSearch = (event) => {
     const inputSearch = event.target.value;
     setSearch(inputSearch);
   };
 
-  const handleStudent = async () => {
-    try {
-      const studentData = await students();
-      const searchedStudent = studentData.filter(
-        (student) =>
-          student.Nombre.toLowerCase().includes(search.toLowerCase()) ||
-          student.Apellido.toLowerCase().includes(search.toLowerCase())
-      );
-      setStudents(searchedStudent);
-    } catch (error) {
-      console.error(error);
-    }
+  const handleStudent = () => {
+    const searchedStudent = studentList.filter(
+      (student) =>
+        student.Nombre.toLowerCase().includes(search.toLowerCase()) ||
+        student.Apellido.toLowerCase().includes(search.toLowerCase())
+    );
+    setStudents(searchedStudent);
   };
 
   const handleButton = (courseName) => {
@@ -53,7 +63,7 @@ export const Search = () => {
           <p>CURSOS</p>
           <p></p>
         </div>
-        {students.map((item) => (
+        {studentsData.map((item) => (
           <div key={item.Id}>
             <div
               className={selectedCourse ? styles.studentBlur : styles.student}

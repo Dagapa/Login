@@ -5,10 +5,6 @@ export const validatorUser = async (username, password) => {
     const data = await user();
     let isUser = false;
 
-    if (data.length > 0) {
-      console.log(data);
-    }
-
     const foundUser = data.find(
       (user) => user.Username === username && user.Password === password
     );

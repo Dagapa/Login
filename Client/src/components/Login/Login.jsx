@@ -24,8 +24,6 @@ export const Login = () => {
     setIsValidUser(isValid);
   };
 
-  console.log(isValidUser)
-
   return (
     <div className={styles.container}>
       <form onSubmit={handleSubmit} className={styles.forms}>
@@ -35,7 +33,7 @@ export const Login = () => {
         <input onChange={handlePassword} type="password" />
         <button type="submit">enviar</button>
       </form>
-      {isValidUser && <Link to={"search"}><button>Ir a búsqueda</button></Link>}
+      {isValidUser && <Link to={"/search"}><span>Ir a búsqueda</span></Link>}
     </div>
   );
 };
