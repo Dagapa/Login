@@ -32,7 +32,7 @@ export const Search = () => {
         student.Nombre.toLowerCase().includes(search.toLowerCase()) ||
         student.Apellido.toLowerCase().includes(search.toLowerCase())
     );
-    setStudents(searchedStudent);
+    setStudentsData(searchedStudent);
   };
 
   const handleButton = (courseName) => {
