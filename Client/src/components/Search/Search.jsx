@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { students } from "../../utils/get";
 import styles from "./Search.module.css";
 
@@ -6,7 +6,7 @@ export const Search = () => {
   const [search, setSearch] = useState("");
   const [studentList, setStudentList] = useState([]);
   const [studentsData, setStudentsData] = useState([]);
-  const [selectedCourse, setSelectedCourse] = useState(null);
+  const [selectedStudent, setSelectedStudent] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,20 +28,17 @@ export const Search = () => {
 
   const handleStudent = () => {
     const searchedStudent = studentList.filter(
-      (student) => student.nombre.toLowerCase().includes(search.toLowerCase()) || student.apellido.toLowerCase().includes(search.toLowerCase()) || student.cedula.toLowerCase().includes(search.toLowerCase())
+      (student) =>
+        student.nombre.toLowerCase().includes(search.toLowerCase()) ||
+        student.apellido.toLowerCase().includes(search.toLowerCase()) ||
+        student.cedula.toLowerCase().includes(search.toLowerCase())
     );
     setStudentsData(searchedStudent);
   };
 
-  const handleButton = (courseName) => {
-    setSelectedCourse(courseName === selectedCourse ? null : courseName);
+  const handleButton = (student) => {
+    setSelectedStudent(student === selectedStudent ? null : student);
   };
-
-  const handleClose = () => {
-    console.log('estoy');
-    setSelectedCourse(null);
-  };
-
 
   return (
     <div>
@@ -56,35 +53,38 @@ export const Search = () => {
       </header>
 
       <section className={styles["content-container"]}>
-        <div className={selectedCourse ? styles.infoBlur : styles.info}>
+        <div className={selectedStudent ? styles.infoBlur : styles.info}>
           <p>NOMBRE</p>
           <p>APELLIDO</p>
           <p>CEDULA</p>
           <p>CURSOS</p>
-          <p></p>
+          <p>SELECT</p>
         </div>
-        {studentsData.map((item) => (
-          <div key={item.id}>
-            <div
-              className={selectedCourse ? styles.studentBlur : styles.student}
-            >
-              <p>{item.nombre}</p>
-              <p>{item.apellido}</p>
-              <p>{item.cedula}</p>
-              <p>{item.noMaterias}</p>
-              <button onClick={() => handleButton(item.materias)}>
-                Cursos
-              </button>
+        {studentsData.map((student) => (
+          <div key={student.id}>
+            <div className={selectedStudent && selectedStudent.id === student.id ? styles.studentBlur : styles.student}>
+              <p>{student.nombre}</p>
+              <p>{student.apellido}</p>
+              <p>{student.cedula}</p>
+              <p>{student.noMaterias}</p>
+              <button onClick={() => handleButton(student)}>Cursos</button>
             </div>
-            {selectedCourse === item.materias && (
+            {selectedStudent && selectedStudent.id === student.id && (
               <div className={styles.modal}>
-                <div className={styles.fix}>
-                  <p>⚠⚠ Pagina en proceso ⚠⚠</p>
+                <div className={styles.modal}>
+                  <div className={styles.close}>
+                    <div
+                      className={styles._closeItem}
+                      onClick={() => setSelectedStudent(null)}
+                    >
+                      X
+                    </div>
+                  </div>
+                  <div className={styles.fix}>
+                    <p>⚠⚠ Pagina en proceso ⚠⚠</p>
+                  </div>
+                  <p>{student.materias}</p>
                 </div>
-                <p>{item.materias}</p>
-                <button className={styles.close} onClick={handleClose}>
-                  X
-                </button>
               </div>
             )}
           </div>

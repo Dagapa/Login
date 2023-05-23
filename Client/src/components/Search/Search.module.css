@@ -9,9 +9,10 @@
 .info {
   display: flex;
   font-size: large;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
-  gap: 80px
+  gap: 60px;
+  width: 100%;
 }
 
 .info p {
@@ -25,25 +26,30 @@
   justify-content: center;
   align-items: center;
   gap: 80px;
-  filter: blur(50px);
 }
 
 .infoBlur p {
+  display: flex;
+  justify-content: space-between;
   text-align: center;
-  width: 200px;
+  text-align: center;
+  width: 150px;
 }
 
 .student {
   display: flex;
   font-size: large;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 80px
+  gap: 80px;
+  width: 100%;
 }
 
 .student p {
+  display: flex;
+  justify-content: space-between;
   text-align: center;
-  width: 200px;
+  width: 190px;
 }
 
 .studentBlur {
@@ -52,7 +58,6 @@
   justify-content: center;
   align-items: center;
   gap: 80px;
-  filter: blur(50px);
 }
 
 .studentBlur p {
@@ -61,25 +66,40 @@
 }
 
 .modal {
-  background-color: rgb(44, 44, 44);
+  background-color: rgb(31, 31, 31);
   position: fixed;
-  width: 500px;
-  left: 450px;
-  top: 350px;
+  height: 50%;
+  width: 50%;
+  top: 200px;
+  right: 320px;
+}
+
+.modal>p {
+  font-size: 27px;
+  font-weight: 600;
 }
 
 .fix {
   background-color: rgb(39, 39, 39);
 }
 
-.close {
-  position: fixed;
-  z-index: 999;
-  top: 335px;
-  right: 570px;
+.fix>p {
+  font-size: 30px;
+  font-weight: bold;
 }
 
-.close:hover {
+.close {
+  display: flex;
+  justify-content: flex-end;
+}
+
+._closeItem {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+._closeItem:hover {
   cursor: pointer;
   color: red;
 }
