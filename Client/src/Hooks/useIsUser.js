@@ -6,7 +6,7 @@ export const validatorUser = async (username, password) => {
     let isUser = false;
 
     const foundUser = data.find(
-      (user) => user.Username === username && user.Password === password
+      (user) => user.user === username && user.password === password
     );
 
     if (foundUser) {

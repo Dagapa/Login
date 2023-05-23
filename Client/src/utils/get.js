@@ -1,7 +1,7 @@
 export async function user() {
   try {
     const response = await fetch(
-      "https://login-production-c7e0.up.railway.app/users"
+      "https://applinea3-production.up.railway.app/users"
     );
 
     const data = await response.json();
@@ -14,7 +14,7 @@ export async function user() {
 export async function students() {
   try {
     const response = await fetch(
-      "https://login-production-c7e0.up.railway.app/students"
+      "https://applinea3-production.up.railway.app/students"
     );
 
     const data = await response.json();

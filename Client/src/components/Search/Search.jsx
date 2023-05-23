@@ -28,9 +28,7 @@ export const Search = () => {
 
   const handleStudent = () => {
     const searchedStudent = studentList.filter(
-      (student) =>
-        student.Nombre.toLowerCase().includes(search.toLowerCase()) ||
-        student.Apellido.toLowerCase().includes(search.toLowerCase())
+      (student) => student.nombre.toLowerCase().includes(search.toLowerCase()) || student.apellido.toLowerCase().includes(search.toLowerCase()) || student.cedula.toLowerCase().includes(search.toLowerCase())
     );
     setStudentsData(searchedStudent);
   };
@@ -40,8 +38,10 @@ export const Search = () => {
   };
 
   const handleClose = () => {
+    console.log('estoy');
     setSelectedCourse(null);
   };
+
 
   return (
     <div>
@@ -64,27 +64,27 @@ export const Search = () => {
           <p></p>
         </div>
         {studentsData.map((item) => (
-          <div key={item.Id}>
+          <div key={item.id}>
             <div
               className={selectedCourse ? styles.studentBlur : styles.student}
             >
-              <p>{item.Nombre}</p>
-              <p>{item.Apellido}</p>
-              <p>{item.Cedula}</p>
-              <p>{item.Cursos}</p>
-              <button onClick={() => handleButton(item.NombreCurso)}>
+              <p>{item.nombre}</p>
+              <p>{item.apellido}</p>
+              <p>{item.cedula}</p>
+              <p>{item.noMaterias}</p>
+              <button onClick={() => handleButton(item.materias)}>
                 Cursos
               </button>
             </div>
-            {selectedCourse === item.NombreCurso && (
+            {selectedCourse === item.materias && (
               <div className={styles.modal}>
                 <div className={styles.fix}>
                   <p>⚠⚠ Pagina en proceso ⚠⚠</p>
                 </div>
-                <p>{item.NombreCurso}</p>
-                <div className={styles.close} onClick={handleClose}>
+                <p>{item.materias}</p>
+                <button className={styles.close} onClick={handleClose}>
                   X
-                </div>
+                </button>
               </div>
             )}
           </div>

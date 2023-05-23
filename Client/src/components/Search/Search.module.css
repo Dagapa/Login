@@ -74,8 +74,9 @@
 
 .close {
   position: fixed;
-  top: 330px;
-  right: 420px;
+  z-index: 999;
+  top: 335px;
+  right: 570px;
 }
 
 .close:hover {
